@@ -1,2 +1,53 @@
-# express-sms-company-check
-å¿«é€’å•å·æŸ¥è¯¢ã€çŸ­ä¿¡éªŒè¯å¤„ç†ã€å…¬å¸æ³¨å†Œæ ¸åï¼ˆä½¿ç”¨â€œèšåˆæ•°æ®â€å’Œâ€œäº‘èšæ•°æ®â€æä¾›çš„APIï¼‰
+# ¹¦ÄÜ
+
+* ¿ìµÝ×´Ì¬²éÑ¯£¬¿ÉÖ§³ÖË³·á¡¢Ô²Í¨¡¢ÖÐÍ¨µÈ¿ìµÝ¹«Ë¾
+* ÊÖ»ú¶ÌÐÅÏÂ·¢£¬¿ÉÓÃÓÚ×¢²á¡¢ÕÒ»ØÃÜÂëµÈ¸÷ÖÖÐèÒªÊÖ»úÑéÖ¤ÂëµÄ³¡¾°,ÓÐÐ§ÆÚÄÚ´¦Àí·ÀÖ¹¶ÌÐÅÕ¨µ¯
+* ÆóÒµºËÃû£¬¼ì²éµ±Ç°ÆóÒµÃû³ÆÊÇ·ñ±»Õ¼ÓÃ
+
+# Ç°ºó¶Ë´úÂë£¬ÒÔ¼°¾ßÌåÊµÏÖ·½Ê½ÏêÏ¸ËµÃ÷ÎÄµµ
+
+[Ê¹ÓÃ¾ÛºÏÊý¾ÝAPIÊµÏÖ¡°¿ìµÝ²éÑ¯-¶ÌÐÅÑéÖ¤-ÆóÒµºËÃû¡±](http://www.itjiaoshou.com/express-sms-company-check-use-api)
+
+# APPKEY ÉêÇë
+
+Çë×ÔÐÐµ½ÏÂÃæÁ½¸öÍøÕ¾×¢²á APPKEY,ÉÔºóÐèÒª½«ËüÃÇ¸´ÖÆµ½ `Home/Conf/config.php` ÖÐ
+
+* http://www.juhe.cn (¿ìµÝ¡¢¶ÌÐÅ ¹²Á½¸ö)
+* http://www.yjapi.com/ £¨ÆóÒµÐÅÏ¢ ¹²Ò»¸ö£©
+
+# ¶ÌÐÅ·¢ËÍ¼ÇÂ¼Êý¾Ý¿â£¨Ö÷ÒªÓÃÓÚ¼ÇÂ¼¶ÌÐÅÑéÖ¤ÂëÏÂ·¢¼ÇÂ¼£¬ÏÞÖÆÓÐÐ§ÆÚ£¬ÒÔ¼°ºË¶ÔÓÃ»§ÊäÈëµÄÑéÖ¤Âë£©
+
+ÒÑ¾­µ¼³ö sql ÎÄ¼þ·ÅÔÚ `/Public/` Ä¿Â¼ÏÂ£¬ÔÚ·þÎñÆ÷ÉÏµ¼Èë¼´¿É
+
+
+# ÅäÖÃÎÄ¼þ·¶Àý£¨ÒòÐÅÏ¢Ãô¸Ð£¬´úÂë¿âÀïÒÑ¾­É¾³ýÕâ¸öÎÄ¼þ£¬Ðè×ÔÐÐÌí¼Ó£©
+
+`Home/Conf/config.php` ÄÚÈÝÈçÏÂ
+
+```php
+<?php
+return array(
+	// ¿ìµÝ²éÑ¯
+	'EXPRESS_APP_KEY' => 'ÄãµÄ¿ìµÝ APPKEY',
+	'EXPRESS_QUERY_URL' => 'http://v.juhe.cn/exp/index', //¿ìµÝµ¥ºÅ²éÑ¯
+	'EXPRESS_COM_URL' => 'http://v.juhe.cn/exp/com', //¿ìµÝ¹«Ë¾²éÑ¯
+
+	// ·¢¶ÌÐÅ
+	'SEND_SMS_KEY' => 'ÄãµÄ¶ÌÐÅ½Ó¿Ú APPKEY',
+	'SEND_SMS_URL' => 'http://v.juhe.cn/sms/send',
+
+	// ºËÃû
+	'COMPANY_KEY' => 'ºËÃû APPKEY',
+	'COMPANY_URL' => 'http://eci.yjapi.com/ECIFast/Search',
+
+	//Êý¾Ý¿âÅäÖÃÐÅÏ¢
+	'DB_TYPE'   => 'mysql', // Êý¾Ý¿âÀàÐÍ
+	'DB_HOST'   => 'localhost', // ·þÎñÆ÷µØÖ·
+	'DB_NAME'   => 'ÄãµÄÊý¾Ý¿âÃû', // Êý¾Ý¿âÃû
+	'DB_USER'   => 'ÄãµÄÊý¾Ý¿âÓÃ»§Ãû', // ÓÃ»§Ãû
+	'DB_PWD'    => 'ÃÜÂë', // ÃÜÂë
+	'DB_PORT'   => 3306, // ¶Ë¿Ú
+	'DB_PREFIX' => 'pre_', // Êý¾Ý¿â±íÇ°×º 
+	'DB_CHARSET'=> 'utf8', // ×Ö·û¼¯
+);
+```

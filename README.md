@@ -42,3 +42,5 @@ return array(
 ```
 
 # ±¸×¢
+
+Çë×¢ÒâĞŞ¸Ä APPKEY

@@ -1,0 +1,279 @@
+<form action="Index_index_submit" method="get" accept-charset="utf-8">
+	
+	<h1>获取快递数据</h1>
+	<div id="express-module">
+		<p>
+			选择公司
+			<select name="express-company" id="express-company">
+				<option value="sf">顺丰</option>
+				<option value="sto">申通</option>
+				<option value="yt">圆通</option>
+				<option value="yd">韵达</option>
+				<option value="tt">天天</option>
+				<option value="ems">EMS</option>
+				<option value="zto">中通</option>
+				<option value="ht">汇通</option>
+			</select>
+		</p>
+
+		<p> 
+			输入单号 <input type="text" name="express-number" id="express-number"> 
+		</p>
+	</div>	
+		
+	<hr>
+
+	<h1>发送短信验证码与检查</h1>
+	<div id="sms-module">
+
+		<p>
+			短信模板：
+			<select name="send-sms-tplid" id="send-sms-tplid">
+				<option value="5596">申请注册</option>
+				<option value="5602">申请找回密码</option>
+				<option value="5603">在线核名</option>
+			</select>
+		</p>
+		
+		<p>
+			手机号码:<input type="text" name="send-sms-mobile" id="send-sms-mobile">
+		</p>
+		
+		<p>
+			输入手机验证码:<input type="text" name="send-sms-code" id="send-sms-code">
+			<span id="sms-count-down"></span>
+			<button id="btn-send-sms" type="button" class="btn btn-default">发送验证码</button>
+		</p>
+
+	</div>
+
+	<hr>
+
+	<h1>企业核名</h1>
+	<div id="company-module">
+		<p>
+			省份：上海
+			<input type="hidden" name="company-province" id="company-province" value="SH">
+		</p>
+		<p>
+			<input type="text" name="company-name" id="company-name">
+		</p>
+		
+	</div>
+
+	<hr>
+
+	<p>
+		（通用）输入验证码 <input type="text" name="verify" id="verify">
+		<img id="verify-img" src="/?m=Home&c=Index&a=verify" alt="">
+		<a id="btn-refresh-verify" href="javascript:;" title="">刷新</a>
+	</p>
+
+	<hr>
+
+	<p> 
+		<button id="btn-query-express" type="button" class="btn btn-default">查询快递</button> 
+		<button id="btn-check-sms" type="button" class="btn btn-default">提交手机验证码</button>
+		<button id="btn-company" type="button" class="btn btn-default">企业核名</button>
+	</p>
+
+	<p>返回结果：</p>
+	<p id="reason" style="color:#FF0000"></p>
+
+	<p>快件动态：</p>
+	<ul id="express-result">
+		
+	</ul>
+
+	<p>公司查询列表：</p>
+	<ul id="company-result">
+		
+	</ul>
+
+</form>
+
+
+
+<!-- 引入jquery库 -->
+<script src="__PUBLIC__/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+/**
+* 发送短信验证码后，60秒倒计时
+*/
+var seconds_left = 60;
+
+function sms_count_down(){
+
+	if(seconds_left > 0){
+		seconds_left = seconds_left-1;
+	    //var b=new Date();
+	    
+	    document.getElementById("sms-count-down").innerHTML = seconds_left + "秒";
+
+	    setTimeout("sms_count_down()",1000);
+	} else {
+		//根据 http://stackoverflow.com/questions/7526601/setattributedisabled-false-changes-editable-attribute-to-false
+		// 不能为 setAttribute 设置任何值，都会变成 ”disabled“,要使用 removeAttribute
+		document.getElementById("btn-send-sms").removeAttribute("disabled");
+		document.getElementById("btn-send-sms").innerHTML = "重新发送";
+		document.getElementById("sms-count-down").innerHTML = "";
+	}
+}
+	
+jQuery(document).ready(function($) {
+	
+	// 页面加载后，自动读取快递公司列表，填充到下拉选择框
+	// $.getJSON(
+	// 	'/?m=Home&c=Index&a=getExpressCompanies', 
+	// 	{}, 
+	// 	function(json, textStatus) {
+	// 		var result = json['result'];
+
+	// 		$("#express-company").html("");
+	// 		for(var i = 0, l = result.length; i < l; i++) {
+	// 		    $("#express-company").append("<option value='" + result[i]['no'] + "'>" + result[i]['com'] + "</option>");
+	// 		}
+			
+	// });
+
+
+	// 刷新验证码按钮
+	$("#btn-refresh-verify").click(function(event) {
+
+		$("#verify-img").attr('src', '/?m=Home&c=Index&a=verify' + "&time=" + new Date().getTime());
+	});
+
+
+	//点击快递查询按钮
+	$("#btn-query-express").click(function(event) {
+
+		$("#reason").html("");
+
+		// 更新验证码
+		$("#verify-img").attr('src', '/?m=Home&c=Index&a=verify' + "&time=" + new Date().getTime());
+
+		$.getJSON(
+			'/?m=Home&c=Index&a=getExpressData', 
+			{
+				company: $("#express-company").val(),
+				number: $("#express-number").val(),
+				verify: $("#verify").val(),
+			}, 
+			function(json, textStatus) {
+
+				if(json['resultcode'] == 200){
+					var result_list = json['result']['list'];
+					$("#express-result").html("");
+
+					for(var i = 0, l = result_list.length; i < l; i++) {
+					    $("#express-result").append("<li>" + result_list[i]['datetime'] + "," + result_list[i]['remark'] + "," +result_list[i]['zone'] + "</li>");
+					}
+				}
+				$("#reason").html(json['reason']);
+		});
+	});
+
+
+	//发送短信
+	$("#btn-send-sms").click(function(event) {
+
+		$("#reason").html("");
+
+		$.getJSON(
+			'/?m=Home&c=Index&a=sendSMS', 
+			{
+				tplid: $("#send-sms-tplid").val(),
+				mobile: $("#send-sms-mobile").val(),
+			}, 
+			function(json, textStatus) {
+
+				$("#reason").html(json['reason']);
+
+				var error_code = json['error_code'];
+				if(error_code == 0){
+					// 测试阶段，不禁用，可检查 60 秒重复发送
+					//$("#btn-send-sms").attr("disabled", true);
+
+					//开始倒计时
+					sms_count_down();
+				}else{
+					$("#btn-send-sms").html("重新发送");
+				}
+	
+		});
+	});
+
+
+	//检查短信验证码
+	$("#btn-check-sms").click(function(event) {
+
+		$("#reason").html("");
+
+		// 更新验证码
+		$("#verify-img").attr('src', '/?m=Home&c=Index&a=verify' + "&time=" + new Date().getTime());
+
+		$.getJSON(
+			'/?m=Home&c=Index&a=checkSmsCode', 
+			{
+				tplid: $("#send-sms-tplid").val(),
+				mobile: $("#send-sms-mobile").val(),
+				code: $("#send-sms-code").val(),
+				verify: $("#verify").val(),
+			}, 
+			function(json, textStatus) {
+
+				$("#reason").html(json['reason']);
+	
+		});
+	});
+
+
+	//企业核名(可输入多个以逗号分隔的名称来多次查询)
+	$("#btn-company").click(function(event) {
+
+		$("#reason").html("");
+
+		$("#company-result").html("");
+
+		// 更新验证码
+		$("#verify-img").attr('src', '/?m=Home&c=Index&a=verify' + "&time=" + new Date().getTime());
+
+		$.getJSON(
+			'/?m=Home&c=Index&a=getCompanyName', 
+			{
+				province: $("#company-province").val(),
+				companyName: $("#company-name").val(),
+				verify: $("#verify").val(),
+			}, 
+			function(json, textStatus) {
+
+				if(json['reason']){
+					$("#reason").html(json['reason']);
+				} else {
+					//console.log(json);
+
+					var json_list = JSON.parse(json);
+
+					if (json_list.length > 0){
+						for(i in json_list){
+							var result_list = json_list[i].Result;
+							if (result_list.length > 0){
+								for(j in result_list){
+									//console.log(result_list[j]);
+									$("#company-result").append("<li> 名称:" + result_list[j].Name + ", 法人：" + result_list[j].OperName + ", 状态：" + result_list[j].Status + "</li>");
+								}
+							}
+						}
+
+					}
+
+				}
+
+		});
+
+	});
+});
+
+</script>

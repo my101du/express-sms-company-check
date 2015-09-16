@@ -1,0 +1,74 @@
+body {
+	color: #7F8C8D;
+}
+
+a {
+	/*color: #34495E;*/
+}
+
+/* 自定义按钮 */
+/*a.btn {
+	color: #95A5A6;
+	border: 1px solid #CCC;
+}
+
+a.btn:hover {
+	color: #7F8C8D;
+	border: 1px solid #AAA;
+}*/
+
+.container {
+	padding: 90px 0px 60px 0px;
+}
+
+
+#logo img {
+	width:50px;
+	margin-top: -15px;
+}
+
+/* 左侧类别列表 */
+#categories-list {
+	position: fixed;
+}
+
+#categories-list li {
+	/*background: #ECF0F1;*/
+}
+
+
+#categories-list li.active {
+	background-color: #1ABC9C;
+	border:0px;
+}
+
+#categories-list li.active a {
+	color: #FFF;
+}
+
+#categories-list li img {
+	width:20px;
+}
+
+.things-item{
+/*	width:30%;
+	float:left;*/
+	border-bottom:1px solid #EEE;
+	margin:15px;
+	padding:5px;
+}
+
+.things-item img {
+	width:100px;
+	display:inline;
+	float:left;
+}
+
+.things-item-split {
+	width:20px;
+	display: inline-block;
+}
+
+.things-item .media-heading a{
+	font-weight: bold;
+}

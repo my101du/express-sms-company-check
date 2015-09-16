@@ -20,58 +20,58 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table renqizx_companyrecord
+# Dump of table pre_companyrecord
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `renqizx_companyrecord`;
+DROP TABLE IF EXISTS `pre_companyrecord`;
 
-CREATE TABLE `renqizx_companyrecord` (
+CREATE TABLE `pre_companyrecord` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` char(15) NOT NULL DEFAULT '',
   `time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-LOCK TABLES `renqizx_companyrecord` WRITE;
-/*!40000 ALTER TABLE `renqizx_companyrecord` DISABLE KEYS */;
+LOCK TABLES `pre_companyrecord` WRITE;
+/*!40000 ALTER TABLE `pre_companyrecord` DISABLE KEYS */;
 
-INSERT INTO `renqizx_companyrecord` (`id`, `ip`, `time`)
+INSERT INTO `pre_companyrecord` (`id`, `ip`, `time`)
 VALUES
 	(30,'127.0.0.1',1442215454);
 
-/*!40000 ALTER TABLE `renqizx_companyrecord` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pre_companyrecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Dump of table renqizx_expressrecord
+# Dump of table pre_expressrecord
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `renqizx_expressrecord`;
+DROP TABLE IF EXISTS `pre_expressrecord`;
 
-CREATE TABLE `renqizx_expressrecord` (
+CREATE TABLE `pre_expressrecord` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` char(15) NOT NULL DEFAULT '',
   `time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-LOCK TABLES `renqizx_expressrecord` WRITE;
-/*!40000 ALTER TABLE `renqizx_expressrecord` DISABLE KEYS */;
+LOCK TABLES `pre_expressrecord` WRITE;
+/*!40000 ALTER TABLE `pre_expressrecord` DISABLE KEYS */;
 
-INSERT INTO `renqizx_expressrecord` (`id`, `ip`, `time`)
+INSERT INTO `pre_expressrecord` (`id`, `ip`, `time`)
 VALUES
 	(16,'127.0.0.1',1442216589);
 
-/*!40000 ALTER TABLE `renqizx_expressrecord` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pre_expressrecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Dump of table renqizx_smsrecord
+# Dump of table pre_smsrecord
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `renqizx_smsrecord`;
+DROP TABLE IF EXISTS `pre_smsrecord`;
 
-CREATE TABLE `renqizx_smsrecord` (
+CREATE TABLE `pre_smsrecord` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mobile` varchar(11) NOT NULL DEFAULT '',
   `tpl_id` int(11) NOT NULL,
@@ -80,16 +80,16 @@ CREATE TABLE `renqizx_smsrecord` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-LOCK TABLES `renqizx_smsrecord` WRITE;
-/*!40000 ALTER TABLE `renqizx_smsrecord` DISABLE KEYS */;
+LOCK TABLES `pre_smsrecord` WRITE;
+/*!40000 ALTER TABLE `pre_smsrecord` DISABLE KEYS */;
 
-INSERT INTO `renqizx_smsrecord` (`id`, `mobile`, `tpl_id`, `code`, `time`)
+INSERT INTO `pre_smsrecord` (`id`, `mobile`, `tpl_id`, `code`, `time`)
 VALUES
 	(9,'2424234',5596,717971,1442198346),
 	(7,'18173782162',5602,275457,1442197799),
 	(10,'234234',5596,424053,1442198397);
 
-/*!40000 ALTER TABLE `renqizx_smsrecord` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pre_smsrecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

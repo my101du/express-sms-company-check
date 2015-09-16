@@ -47,3 +47,4 @@ return array(
 请注意修改数据库连接的参数
 
 APPKEY 从两个网站中申请
+数据库从 /Public/xxx.sql 还原到服务器

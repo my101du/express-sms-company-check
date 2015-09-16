@@ -44,3 +44,4 @@ return array(
 # 备注
 
 请注意修改 APPKEY
+请注意修改数据库连接的参数
